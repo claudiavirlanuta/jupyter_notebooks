@@ -1,0 +1,151 @@
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Python:-What-does-the-'yield'-keyword-do?">Python: What does the 'yield' keyword do?<a class="anchor-link" href="#Python:-What-does-the-'yield'-keyword-do?">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Once upon a time there was a Python list, called lyst. Lyst was a useful little data structure because, as is the case with all lists, one could read through it's elements one by one. Reading through the elements of a list one by one is called <strong>iteration</strong>, and the list is called <strong>an iterable</strong>.</p>
+<p>A list has the following characteristics:</p>
+<ol>
+<li>It is stored in memory</li>
+<li>It can be iterated over as many times as needed</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">lyst</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">lyst</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">elem</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>1
+2
+3
+4
+5
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In fact, every data structure that you can use a <em>for</em> loop on is an iterable. Other examples of iterables in Python, besides lists, are sets, ranges, dictionaries, and generators.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Generators">Generators<a class="anchor-link" href="#Generators">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Generators are a type of iterable as well. However, a generator is different from a list in <strong>two very important ways</strong>:</p>
+<ol>
+<li>It generates numbers on the fly, which are not stored in memory</li>
+<li>It can only be iterated over once.</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">makeGenerator</span><span class="p">():</span>
+    <span class="n">lyst</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">lyst</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">elem</span>
+
+<span class="c1"># create a new generator object</span>
+<span class="n">newgenerator</span> <span class="o">=</span> <span class="n">makeGenerator</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">newgenerator</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">elem</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>1
+2
+3
+4
+5
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="What-Happens-Inside-A-Generator">What Happens Inside A Generator<a class="anchor-link" href="#What-Happens-Inside-A-Generator">&#182;</a></h2><p>An important thing to note is that the code inside makeGenerator() <strong>does not run when newgenerator is created</strong>. Instead, when the for-loop over the newgenerator runs for the first time, the code inside makeGenerator() runs from beginning to end. For all subsequent iterations over newgenerator, only the for-loop inside makeGenerator() will run, returning the next element, until it reaches the end of lyst.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="The-'yield'-Keyword">The 'yield' Keyword<a class="anchor-link" href="#The-'yield'-Keyword">&#182;</a></h2><p>The 'yield' keyword performs the same function as 'return', but can only be used with a generator. In other words, without 'yield' in makeGenerator(), creating newgenerator would not be possible.</p>
+
+</div>
+</div>
+</div>
